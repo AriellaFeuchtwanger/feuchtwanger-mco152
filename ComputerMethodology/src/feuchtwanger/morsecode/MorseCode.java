@@ -2,13 +2,14 @@ package feuchtwanger.morsecode;
 
 public class MorseCode {
 
-	String [][] code;
-	public MorseCode(){
+	String[][] code;
+
+	public MorseCode() {
 		code = new String[36][2];
-		
-		//Put everything in a two dimensional array - The first
-		//column will contain the letters while the second will
-		//contain the code for each letter
+
+		// Put everything in a two dimensional array - The first
+		// column will contain the letters while the second will
+		// contain the code for each letter
 		code[0][0] = "A";
 		code[1][0] = "B";
 		code[2][0] = "C";
@@ -45,7 +46,7 @@ public class MorseCode {
 		code[33][0] = "8";
 		code[34][0] = "9";
 		code[35][0] = "0";
-		
+
 		code[0][1] = ".-";
 		code[1][1] = "-...";
 		code[2][1] = "-.-.";
@@ -83,22 +84,57 @@ public class MorseCode {
 		code[34][1] = "----.";
 		code[35][1] = "-----";
 	}
-	
-	public String encode(String message){
+
+	public String encode(String message) {
 		String[] tokens = message.split("");
-		String code;
-		return null;
+		String code = " ";
+		int wordCount = 0;
+		boolean found = false;
+		do{
+			for(int i = 0; i <= tokens[wordCount].length(); i++){
+				String letter = String.valueOf(tokens[wordCount].charAt(i));
+				for(int j = 0; j < 36; j++){
+					if(this.code[j][0].equalsIgnoreCase(letter)){
+						code.concat(this.code[j][1] + " ");
+						found = true;
+						break;
+					}
+				}
+				if(found = false){
+					throw new InvalidCharacterException();
+				}
+			}
+			code.concat("   ");
+		}while(wordCount <= tokens.length);
+		return code;
 	}
-	
-	public String decode(String code){
+
+	public String decode(String code) {
 		String[] words = code.split("   ");
-		String message;
-		
-		for(int i = 0; i < words.length; i++){
-			String[] letters = words[i].split(" ");
-			
-		}
-		
-		return null;
+		String message = " ";
+		int counter = 0;
+		boolean found = false;
+
+		do {
+			String[] letters = words[counter].split(" ");
+			int letterCounter = 0;
+			do {
+				for (int i = 0; i < 36; i++) {
+					if (this.code[i][1].equals(letters[letterCounter])) {
+						message.concat(this.code[i][0]);
+						found = true;
+						break;
+					}
+				}
+				if(found = false){
+					throw new InvalidCharacterException();
+				}
+				message.concat(" ");
+				letterCounter++;
+			} while (letterCounter <= letters.length);
+			counter++;
+		} while (counter < words.length);
+
+		return message;
 	}
 }
