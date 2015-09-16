@@ -86,55 +86,54 @@ public class MorseCode {
 	}
 
 	public String encode(String message) {
-		String[] tokens = message.split("");
-		String code = " ";
-		int wordCount = 0;
-		boolean found = false;
-		do{
-			for(int i = 0; i <= tokens[wordCount].length(); i++){
-				String letter = String.valueOf(tokens[wordCount].charAt(i));
-				for(int j = 0; j < 36; j++){
-					if(this.code[j][0].equalsIgnoreCase(letter)){
-						code.concat(this.code[j][1] + " ");
-						found = true;
+		String[] tokens = message.split(" ");
+		String[][] symbols = new String[tokens.length][];
+
+		for (int i = 0; i < tokens.length; i++) {
+			symbols[i] = tokens[i].split("");
+			for (int j = 0; j < symbols[i].length; j++) {
+				for (int k = 0; k < 36; k++) {
+					if (this.code[k][0].equalsIgnoreCase(symbols[i][j])) {
+						symbols[i][j] = String.valueOf(this.code[k][1]);
 						break;
 					}
 				}
-				if(found = false){
-					throw new InvalidCharacterException();
-				}
 			}
-			code.concat("   ");
-		}while(wordCount <= tokens.length);
+		}
+		
+		String code = "";
+		for (int i = 0; i < symbols.length; i++) {
+			for (int j = 0; j < symbols[i].length; j++) {
+				code = code + symbols[i][j] + " ";
+			}
+			code += "   ";
+		}
 		return code;
 	}
 
 	public String decode(String code) {
 		String[] words = code.split("   ");
-		String message = " ";
-		int counter = 0;
-		boolean found = false;
+		String[][] letters = new String[words.length][];
 
-		do {
-			String[] letters = words[counter].split(" ");
-			int letterCounter = 0;
-			do {
-				for (int i = 0; i < 36; i++) {
-					if (this.code[i][1].equals(letters[letterCounter])) {
-						message.concat(this.code[i][0]);
-						found = true;
+		for (int i = 0; i < words.length; i++) {
+			letters[i] = words[i].split(" ");
+			for (int j = 0; j < letters[i].length; j++) {
+				for (int k = 0; k < 36; k++) {
+					if (this.code[k][1].equalsIgnoreCase(letters[i][j])) {
+						letters[i][j] = String.valueOf(this.code[k][0]);
 						break;
 					}
 				}
-				if(found = false){
-					throw new InvalidCharacterException();
-				}
-				message.concat(" ");
-				letterCounter++;
-			} while (letterCounter <= letters.length);
-			counter++;
-		} while (counter < words.length);
-
+			}
+		}
+		
+		String message = "";
+		for (int i = 0; i < words.length; i++) {
+			for (int j = 0; j < letters[i].length; j++) {
+				message += letters[i][j];
+			}
+			message += " ";
+		}
 		return message;
 	}
 }
