@@ -16,8 +16,9 @@ public class MorseCodeTest {
 	@Test
 	public void testDecode(){
 		MorseCode code = new MorseCode();
-		String message = code.encode(".... ..    ");
+		String message = code.decode(".... .. ");
 		
+		Assert.assertEquals("HI ", message);
 		
 	}
 }
