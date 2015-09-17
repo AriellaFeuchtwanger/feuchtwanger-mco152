@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class ScrabbleDictionary {
 
-	ArrayList<String> dictionary;
+	private ArrayList<String> dictionary;
 
 	public ScrabbleDictionary() throws FileNotFoundException {
 
@@ -19,6 +19,7 @@ public class ScrabbleDictionary {
 
 		} while (input.hasNext());
 
+		input.close();
 		this.dictionary = dictionary;
 	}
 

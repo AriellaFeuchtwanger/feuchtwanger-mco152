@@ -2,7 +2,7 @@ package feuchtwanger.morsecode;
 
 public class MorseCode {
 
-	String[][] code;
+	private String[][] code;
 
 	public MorseCode() {
 		code = new String[36][2];
