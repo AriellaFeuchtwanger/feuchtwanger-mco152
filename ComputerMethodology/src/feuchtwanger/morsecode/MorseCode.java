@@ -108,6 +108,7 @@ public class MorseCode {
 			}
 			code += "   ";
 		}
+		//return code
 		return code;
 	}
 
