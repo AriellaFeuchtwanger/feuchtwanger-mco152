@@ -8,9 +8,9 @@ public class MorseCodeTest {
 	@Test
 	public void testEncode(){
 		MorseCode code = new MorseCode();
-		String message = code.encode("Hi");
+		String message = code.encode("HI ");
 		
-		Assert.assertEquals(".... ..    ", message);
+		Assert.assertEquals(".... ..", message);
 	}
 	
 	@Test
@@ -18,7 +18,7 @@ public class MorseCodeTest {
 		MorseCode code = new MorseCode();
 		String message = code.decode(".... .. ");
 		
-		Assert.assertEquals("HI ", message);
+		Assert.assertEquals("HI", message);
 		
 	}
 }

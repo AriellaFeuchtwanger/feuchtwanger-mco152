@@ -3,20 +3,24 @@ package feuchtwanger.scrabble;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class ScrabbleDictionary {
 
-	private ArrayList<String> dictionary;
+	//private ArrayList<String> dictionary;
+	private HashSet dictionary;
 
 	public ScrabbleDictionary() throws FileNotFoundException {
 
 		Scanner input = new Scanner(new File("US.dic"));
 
-		ArrayList<String> dictionary = new ArrayList<String>();
+		dictionary = new HashSet<String>();
 		do {
-			dictionary.add(input.next());
-
+			String s = input.next();
+			if(!dictionary.contains(s)){
+				dictionary.add(s);
+			}
 		} while (input.hasNext());
 
 		input.close();
@@ -24,9 +28,6 @@ public class ScrabbleDictionary {
 	}
 
 	public boolean contains(String word) {
-		if (this.dictionary.contains(word)) {
-			return true;
-		} else
-			return false;
+		return dictionary.contains(word);
 	}
 }
