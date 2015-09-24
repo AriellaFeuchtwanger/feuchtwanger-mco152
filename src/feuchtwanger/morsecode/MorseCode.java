@@ -97,15 +97,14 @@ public class MorseCode {
 	}
 
 	public String encode(String message) {
+		message.toUpperCase();
 		String[] tokens = message.split(" ");
 		String[][] symbols = new String[tokens.length][];
 
 		for (int i = 0; i < tokens.length; i++) {
 			symbols[i] = tokens[i].split("");
 			for (int j = 0; j < symbols[i].length; j++) {
-				if (code.containsKey(symbols[i][j])) {
-					symbols[i][j] = code.get(symbols[i][j]);
-				}
+				symbols[i][j] = code.get(symbols[i][j]);
 			}
 		}
 

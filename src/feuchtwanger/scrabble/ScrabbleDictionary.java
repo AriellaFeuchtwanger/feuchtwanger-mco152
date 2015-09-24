@@ -1,33 +1,32 @@
 package feuchtwanger.scrabble;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashSet;
-import java.util.Scanner;
 
 public class ScrabbleDictionary {
 
-	//private ArrayList<String> dictionary;
+	// private ArrayList<String> dictionary;
 	private HashSet dictionary;
 
-	public ScrabbleDictionary() throws FileNotFoundException {
+	public ScrabbleDictionary() throws IOException {
 
-		Scanner input = new Scanner(new File("US.dic"));
+		final BufferedReader in = new BufferedReader(new FileReader("./US.dic"));
 
 		dictionary = new HashSet<String>();
-		do {
-			String s = input.next();
-			if(!dictionary.contains(s)){
-				dictionary.add(s);
-			}
-		} while (input.hasNext());
+		String line;
 
-		input.close();
+		while ((line = in.readLine()) != null) {
+			dictionary.add(line);
+		}
+
+		in.close();
 		this.dictionary = dictionary;
 	}
 
 	public boolean contains(String word) {
+		word.toLowerCase();
 		return dictionary.contains(word);
 	}
 }
