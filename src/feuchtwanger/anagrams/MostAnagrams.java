@@ -13,7 +13,6 @@ public class MostAnagrams {
 
 	public static void main(String[] args) throws FileNotFoundException {
 		Scanner input = new Scanner(new File("US.dic"));
-		String[] letters;
 		String[] lettersT;
 		String word;
 		ArrayList<String>words;
