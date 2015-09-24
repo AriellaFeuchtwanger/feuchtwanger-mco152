@@ -1,16 +1,15 @@
 package feuchtwanger.morsecode;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class MorseCode {
 
-	private HashMap<String, String> code;
+	private final HashMap<String, String> code;
 
 	public MorseCode() {
-		String letters[] = new String[36];
-		String symbols[] = new String[36];
-		HashMap<String, String> code = new HashMap<String, String>();
+		final String letters[] = new String[36];
+		final String symbols[] = new String[36];
+		final HashMap<String, String> code = new HashMap<String, String>();
 
 		// Put everything in a two dimensional array - The first
 		// column will contain the letters while the second will
@@ -96,33 +95,9 @@ public class MorseCode {
 		this.code = code;
 	}
 
-	public String encode(String message) {
-		message.toUpperCase();
-		String[] tokens = message.split(" ");
-		String[][] symbols = new String[tokens.length][];
-
-		for (int i = 0; i < tokens.length; i++) {
-			symbols[i] = tokens[i].split("");
-			for (int j = 0; j < symbols[i].length; j++) {
-				symbols[i][j] = code.get(symbols[i][j]);
-			}
-		}
-
-		StringBuilder builder = new StringBuilder();
-		for (int i = 0; i < symbols.length; i++) {
-			for (int j = 0; j < symbols[i].length; j++) {
-				builder.append(symbols[i][j]);
-				builder.append(" ");
-			}
-			builder.append("   ");
-		}
-
-		return builder.toString().trim();
-	}
-
 	public String decode(String message) {
-		String[] words = message.split("   ");
-		String[][] letters = new String[words.length][];
+		final String[] words = message.split("   ");
+		final String[][] letters = new String[words.length][];
 
 		for (int i = 0; i < words.length; i++) {
 			letters[i] = words[i].split(" ");
@@ -133,13 +108,37 @@ public class MorseCode {
 			}
 		}
 
-		StringBuilder builder = new StringBuilder();
+		final StringBuilder builder = new StringBuilder();
 		for (int i = 0; i < words.length; i++) {
 			for (int j = 0; j < letters[i].length; j++) {
 				builder.append(letters[i][j]);
 			}
 			builder.append(" ");
 		}
+		return builder.toString().trim();
+	}
+
+	public String encode(String message) {
+		message.toUpperCase();
+		final String[] tokens = message.split(" ");
+		final String[][] symbols = new String[tokens.length][];
+
+		for (int i = 0; i < tokens.length; i++) {
+			symbols[i] = tokens[i].split("");
+			for (int j = 0; j < symbols[i].length; j++) {
+				symbols[i][j] = code.get(symbols[i][j]);
+			}
+		}
+
+		final StringBuilder builder = new StringBuilder();
+		for (int i = 0; i < symbols.length; i++) {
+			for (int j = 0; j < symbols[i].length; j++) {
+				builder.append(symbols[i][j]);
+				builder.append(" ");
+			}
+			builder.append("   ");
+		}
+
 		return builder.toString().trim();
 	}
 }

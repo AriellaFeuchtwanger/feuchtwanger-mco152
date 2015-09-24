@@ -6,26 +6,38 @@ import org.junit.Test;
 public class PythagoreanTheoremTest {
 
 	@Test
+	public void testInvalidData() {
+		try {
+			final PythagoreanTheorem p = new PythagoreanTheorem();
+			p.setAB(0, 0);
+			Assert.fail("Did not throw exception");
+		} catch (final InvalidDataException e) {
+			// expected
+		}
+
+	}
+
+	@Test
 	public void testSetAB() {
-		PythagoreanTheorem p = new PythagoreanTheorem();
+		final PythagoreanTheorem p = new PythagoreanTheorem();
 		p.setAB(4.0, 3.0);
-		double c = p.getC();
+		final double c = p.getC();
 
 		Assert.assertEquals(5.0, c, 0.01);
 	}
 
 	public void testSetBC() {
-		PythagoreanTheorem p = new PythagoreanTheorem();
+		final PythagoreanTheorem p = new PythagoreanTheorem();
 		p.setBC(4.0, 5.0);
-		double a = p.getA();
+		final double a = p.getA();
 
 		Assert.assertEquals(3.0, a, 0.01);
 	}
 
 	public void testSetCA() {
-		PythagoreanTheorem p = new PythagoreanTheorem();
+		final PythagoreanTheorem p = new PythagoreanTheorem();
 		p.setCA(5.0, 3.0);
-		double b = p.getB();
+		final double b = p.getB();
 
 		Assert.assertEquals(4.0, b, 0.01);
 
