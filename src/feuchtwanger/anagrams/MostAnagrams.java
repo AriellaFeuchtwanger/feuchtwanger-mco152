@@ -1,27 +1,25 @@
 package feuchtwanger.anagrams;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class MostAnagrams {
 
-	public static void main(String[] args) throws FileNotFoundException {
-		final Scanner input = new Scanner(new File("./US.dic"));
+	public static void main(String[] args) throws IOException {
+		final BufferedReader input = new BufferedReader(new FileReader("./US.dic"));
 		String[] lettersT;
-		String word;
 		ArrayList<String> words;
 		final HashMap<String, ArrayList<String>> anagrams = new HashMap<String, ArrayList<String>>();
 		String newWord;
+		String line;
 
-		anagrams.put(input.next(), new ArrayList<String>());
-		do {
-			word = input.next();
-			lettersT = word.split("");
+		while ((line = input.readLine()) != null) {
+			lettersT = line.split("");
 			Arrays.sort(lettersT);
 			final StringBuilder b = new StringBuilder();
 			for (final String s : lettersT) {
@@ -32,13 +30,13 @@ public class MostAnagrams {
 			words = anagrams.get(newWord);
 			if (words == null) {
 				words = new ArrayList<String>();
-				words.add(word);
+				words.add(line);
 				anagrams.put(newWord, words);
 			} else {
-				words.add(word);
+				words.add(line);
 				anagrams.put(newWord, words);
 			}
-		} while (input.hasNext());
+		}
 
 		int temp = 0;
 		String largestAnagram = "";

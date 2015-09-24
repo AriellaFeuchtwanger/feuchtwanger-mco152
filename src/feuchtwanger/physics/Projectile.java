@@ -2,13 +2,11 @@ package feuchtwanger.physics;
 
 public class Projectile {
 
-	private double angle;
 	private double time;
-	private double velocity;
-	private double radians;
+	private final double velocity;
+	private final double radians;
 
 	public Projectile(double angle, double velocity, double seconds) {
-		this.angle = angle;
 		radians = Math.toRadians(angle);
 		this.time = seconds;
 		this.velocity = velocity;
@@ -19,10 +17,10 @@ public class Projectile {
 	}
 
 	public double getY() {
-		return ((Math.cos(radians)) * velocity * time - (0.5 * 9.8 * time * time));
+		return (((Math.cos(radians)) * velocity * time) - (0.5 * 9.8 * time * time));
 	}
-	
-	public void setTime(){
+
+	public void setTime() {
 		time += 0.1;
 	}
 }

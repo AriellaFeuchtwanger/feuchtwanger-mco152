@@ -8,7 +8,7 @@ import java.util.HashSet;
 public class ScrabbleDictionary {
 
 	// private ArrayList<String> dictionary;
-	private HashSet dictionary;
+	private final HashSet<String> dictionary;
 
 	public ScrabbleDictionary() throws IOException {
 
@@ -22,7 +22,6 @@ public class ScrabbleDictionary {
 		}
 
 		in.close();
-		this.dictionary = dictionary;
 	}
 
 	public boolean contains(String word) {
