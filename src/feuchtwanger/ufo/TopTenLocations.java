@@ -37,11 +37,9 @@ public class TopTenLocations {
 	public HashMap<String, Integer> getMap() {
 		return map;
 	}
-
-	public HashMap<String, Integer> getTopTen() {
-		topTen = new HashMap<String, Integer>(10);
+	
+	public ArrayList<Integer> getViews(){
 		ArrayList<Integer> views = new ArrayList<Integer>(map.values());
-
 		Collections.sort(views);
 		Collections.reverse(views);
 
@@ -49,16 +47,6 @@ public class TopTenLocations {
 		for (int i = 0; i < 10; i++) {
 			topTenViews.add(views.get(i));
 		}
-		
-		for (Integer i : topTenViews) {
-			for (Map.Entry<String, Integer> entry : map.entrySet()) {
-				if (entry.getValue().equals(i)) {
-					topTen.put(entry.getKey(), entry.getValue());
-					break;
-				}
-			}
-		}
-		
-		return topTen;
+		return topTenViews;
 	}
 }

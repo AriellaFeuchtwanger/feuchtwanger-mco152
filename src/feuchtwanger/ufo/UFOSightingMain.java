@@ -3,6 +3,7 @@ package feuchtwanger.ufo;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,13 +20,18 @@ public class UFOSightingMain {
 
 		TopTenLocations t = new TopTenLocations(list);
 
-		HashMap<String, Integer> map = t.getTopTen();
-
-		for (Map.Entry<String, Integer> entry : map.entrySet()) {
-			System.out.println(" Location: " + entry.getKey());
-			System.out.println(" Number of Sightings: " + entry.getValue());
+		HashMap<String, Integer> map = t.getMap();
+		ArrayList<Integer> views = t.getViews();
+		
+		for (Integer i : views) {
+			for (Map.Entry<String, Integer> entry : map.entrySet()) {
+				if (entry.getValue().equals(i)) {
+					System.out.println(" Location: " + entry.getKey());
+					System.out.println(" Number of Sightings: " + entry.getValue());
+				}
+			}
 		}
-
+		
 		in.close();
 	}
 }
