@@ -1,6 +1,5 @@
 package feuchtwanger.ufo;
 
-
 public class UFOSighting {
 
 	private String sightedAt;
@@ -10,4 +9,7 @@ public class UFOSighting {
 	private String duration;
 	private String description;
 
+	public String getLocation() {
+		return this.location;
+	}
 }

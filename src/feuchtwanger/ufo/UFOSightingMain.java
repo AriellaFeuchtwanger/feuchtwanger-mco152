@@ -3,6 +3,8 @@ package feuchtwanger.ufo;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.google.gson.Gson;
 
@@ -14,7 +16,15 @@ public class UFOSightingMain {
 
 		final UFOSightingList list = gson.fromJson(in, UFOSightingList.class);
 		// Will return a list of UFO sightings
-		System.out.println("List size: " + list.size());
+
+		TopTenLocations t = new TopTenLocations(list);
+
+		HashMap<String, Integer> map = t.getMap();
+
+		for (Map.Entry<String, Integer> entry : map.entrySet()) {
+			System.out.println(" Location: " + entry.getKey());
+			System.out.println(" Number of Sighting: " + entry.getValue());
+		}
 
 		in.close();
 	}
