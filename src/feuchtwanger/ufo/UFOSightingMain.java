@@ -19,11 +19,11 @@ public class UFOSightingMain {
 
 		TopTenLocations t = new TopTenLocations(list);
 
-		HashMap<String, Integer> map = t.getMap();
+		HashMap<String, Integer> map = t.getTopTen();
 
 		for (Map.Entry<String, Integer> entry : map.entrySet()) {
 			System.out.println(" Location: " + entry.getKey());
-			System.out.println(" Number of Sighting: " + entry.getValue());
+			System.out.println(" Number of Sightings: " + entry.getValue());
 		}
 
 		in.close();
