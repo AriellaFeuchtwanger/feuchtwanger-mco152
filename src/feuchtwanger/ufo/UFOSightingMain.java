@@ -23,9 +23,9 @@ public class UFOSightingMain {
 		HashMap<String, Integer> map = t.getMap();
 		ArrayList<Integer> views = t.getViews();
 		
-		for (Integer i : views) {
+		for (int i = 0; i < 10; i++) {
 			for (Map.Entry<String, Integer> entry : map.entrySet()) {
-				if (entry.getValue().equals(i)) {
+				if (entry.getValue().equals(views.get(i))) {
 					System.out.println(" Location: " + entry.getKey());
 					System.out.println(" Number of Sightings: " + entry.getValue());
 				}

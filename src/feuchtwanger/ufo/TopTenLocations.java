@@ -13,8 +13,7 @@ public class TopTenLocations {
 
 	private UFOSightingList list;
 	private HashMap<String, Integer> map;
-	private HashMap<String, Integer> topTen;
-
+	
 	public TopTenLocations(UFOSightingList list) {
 		this.list = list;
 		map = new HashMap<String, Integer>();
@@ -43,10 +42,7 @@ public class TopTenLocations {
 		Collections.sort(views);
 		Collections.reverse(views);
 
-		ArrayList<Integer> topTenViews = new ArrayList<Integer>();
-		for (int i = 0; i < 10; i++) {
-			topTenViews.add(views.get(i));
-		}
-		return topTenViews;
+		
+		return views;
 	}
 }
