@@ -27,6 +27,7 @@ public class SmileComponent extends JComponent{
 		g.fillOval(420, 200, 45, 45);
 		
 		g.drawArc(310, 300, 150, 100, 900, 180);
+		
 	}
 
 }
