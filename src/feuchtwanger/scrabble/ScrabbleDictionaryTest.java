@@ -9,15 +9,11 @@ public class ScrabbleDictionaryTest {
 
 	@Test
 	public void testScrabbleDictionaryPresent() throws IOException{
-		ScrabbleDictionary d = new ScrabbleDictionary();
-		
-		Assert.assertTrue(d.contains("hello"));
+		Assert.assertTrue(ScrabbleDictionary.getInstance().contains("hello"));
 	}
 	
 	@Test
 	public void testScrabbleDictionaryNotFound() throws IOException{
-		ScrabbleDictionary d = new ScrabbleDictionary();
-		
-		Assert.assertFalse(d.contains("ui"));
+		Assert.assertFalse(ScrabbleDictionary.getInstance().contains("ui"));
 	}
 }

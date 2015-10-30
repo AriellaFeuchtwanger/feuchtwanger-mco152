@@ -7,7 +7,7 @@ import java.util.HashSet;
 
 public class ScrabbleDictionary {
 
-	// private ArrayList<String> dictionary;
+	private static ScrabbleDictionary singleton;
 	private final HashSet<String> dictionary;
 
 	public ScrabbleDictionary() throws IOException {
@@ -27,5 +27,13 @@ public class ScrabbleDictionary {
 	public boolean contains(String word) {
 		word.toLowerCase();
 		return dictionary.contains(word);
+	}
+	
+	//Typically called getInstance. Hides it.
+	public static ScrabbleDictionary getInstance() throws IOException{
+		if(singleton == null){
+			singleton = new ScrabbleDictionary();
+		}
+		return singleton;
 	}
 }
