@@ -19,7 +19,11 @@ public class SmileJFrame extends JFrame{
 		Container container = getContentPane();
 		container.setLayout(layout);
 		container.add(new SmileComponent(), BorderLayout.CENTER);
+<<<<<<< HEAD
 		container.add(new SmileComponent2(), BorderLayout.CENTER);
+=======
+		//container.add(new SmileComponent2(), BorderLayout.CENTER);
+>>>>>>> f630de877d92290c1a05ebc57d60128db8e6db63
 	}
 
 }
