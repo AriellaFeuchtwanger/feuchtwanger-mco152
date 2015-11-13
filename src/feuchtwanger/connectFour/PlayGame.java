@@ -3,7 +3,8 @@ package feuchtwanger.connectFour;
 public class PlayGame {
 
 	public static void main(String[] args) {
-		Game g = new Game();
+		BoardJFrame game = new BoardJFrame();
+		game.setVisible(true);
 
 	}
 

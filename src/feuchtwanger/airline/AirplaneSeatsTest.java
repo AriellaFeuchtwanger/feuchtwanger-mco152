@@ -138,10 +138,10 @@ public class AirplaneSeatsTest {
 	public void testReserveGroupThrowsNotEnoughSeatsException() throws AlreadyReservedException, SeatOutOfBoundsException {
 		AirplaneSeats seats = new AirplaneSeats(3, 4);
 		seats.reserve("A1");
-		seats.reserve("B1");
-		seats.reserve("C1");
+		seats.reserve("A2");
+		seats.reserve("A3");
 		try{
-			seats.reserveGroup(3);
+			seats.reserveGroup(4);
 			Assert.fail("Should have thrown an exception");
 		}
 		catch(NotEnoughSeatsException e1){
