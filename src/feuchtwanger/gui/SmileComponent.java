@@ -6,6 +6,10 @@ import java.awt.Graphics;
 import javax.swing.JComponent;
 
 public class SmileComponent extends JComponent {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int y = 200;
 	private int height = 75;
 	private int pupilHeight = 45;

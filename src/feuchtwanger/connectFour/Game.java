@@ -31,6 +31,9 @@ public class Game {
 		return win;
 	}
 	
+	public Board getBoard(){
+		return board;
+	}
 	private boolean win(int row, int column){
 		boolean win = board.win(row, column, lastPlayer.getColor());
 		return win;

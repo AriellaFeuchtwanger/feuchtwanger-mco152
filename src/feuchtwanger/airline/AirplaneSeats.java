@@ -192,6 +192,7 @@ public class AirplaneSeats {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
+		StringBuilder seatName = new StringBuilder();
 		int count = columns; // keep track of when to put in a new line
 		int rowCount = 1;
 		builder.append("  ");
@@ -200,22 +201,113 @@ public class AirplaneSeats {
 		builder.append(rowCount);
 		builder.append(" ");
 
-		for (Map.Entry<String, Boolean> e : seats.entrySet()) {
-			if (count == 0) {
-				rowCount++;
-				builder.append("\n");
-				builder.append(rowCount);
-				builder.append(" ");
-				count = columns;
-			}
-			count--;
+		for (int j = 1; j <= rows; j++) {
+			for (int i = 1; i <= columns; i++) {
+				String column = "";
+				switch (i) {
+				case 1:
+					column = "A";
+					break;
+				case 2:
+					column = "B";
+					break;
+				case 3:
+					column = "C";
+					break;
+				case 4:
+					column = "D";
+					break;
+				case 5:
+					column = "E";
+					break;
+				case 6:
+					column = "F";
+					break;
+				case 7:
+					column = "G";
+					break;
+				case 8:
+					column = "H";
+					break;
+				case 9:
+					column = "I";
+					break;
+				case 10:
+					column = "J";
+					break;
+				case 11:
+					column = "K";
+					break;
+				case 12:
+					column = "L";
+					break;
+				case 13:
+					column = "M";
+					break;
+				case 14:
+					column = "N";
+					break;
+				case 15:
+					column = "O";
+					break;
+				case 16:
+					column = "P";
+					break;
+				case 17:
+					column = "Q";
+					break;
+				case 18:
+					column = "R";
+					break;
+				case 19:
+					column = "S";
+					break;
+				case 20:
+					column = "T";
+					break;
+				case 21:
+					column = "U";
+					break;
+				case 22:
+					column = "V";
+					break;
+				case 23:
+					column = "W";
+					break;
+				case 24:
+					column = "X";
+					break;
+				case 25:
+					column = "Y";
+					break;
+				case 26:
+					column = "Z";
+					break;
+				}
 
-			if (e.getValue()) {
-				builder.append("#");
-			} else {
-				builder.append("o");
+				seatName.append(column);
+				seatName.append(j);
+				for (Map.Entry<String, Boolean> e : seats.entrySet()) {
+					if (e.getKey().equals(seatName.toString())) {
+						if (count == 0) {
+							rowCount++;
+							builder.append("\n");
+							builder.append(rowCount);
+							builder.append(" ");
+							count = columns;
+						}
+						count--;
+
+						if (e.getValue()) {
+							builder.append("#");
+						} else {
+							builder.append("o");
+						}
+					}
+				}
 			}
 		}
+
 		builder.append("\n");
 		return builder.toString();
 	}
@@ -230,37 +322,37 @@ public class AirplaneSeats {
 	 * @return an ArrayList of seatNames of the seats that have been reserved.
 	 * @throws NotEnoughSeatsException
 	 *             if there are not enough seats together to reserve.
-	 * @throws SeatOutOfBoundsException 
-	 * @throws AlreadyReservedException 
+	 * @throws SeatOutOfBoundsException
+	 * @throws AlreadyReservedException
 	 */
-	public ArrayList<String> reserveGroup(int numberOfSeatsTogether) throws NotEnoughSeatsException, AlreadyReservedException, SeatOutOfBoundsException {
+	public ArrayList<String> reserveGroup(int numberOfSeatsTogether) throws NotEnoughSeatsException,
+			AlreadyReservedException, SeatOutOfBoundsException {
 		ArrayList<String> seatGroup = new ArrayList<String>();
 		int count = columns;
 		int number = numberOfSeatsTogether;
-		
-		if(numberOfSeatsTogether > columns){
+
+		if (numberOfSeatsTogether > columns) {
 			throw new NotEnoughSeatsException();
 		}
-		
+
 		if (!isPlaneFull()) {
-			
+
 			char column;
-			for(int i = 0; i < columns; i++){
+			for (int i = 0; i < columns; i++) {
 				column = columnList.charAt(i);
 				number = numberOfSeatsTogether;
-				for(int j = 1; j <= rows; j++){
+				for (int j = 1; j <= rows; j++) {
 					StringBuilder builder = new StringBuilder();
 					builder.append(column);
 					builder.append(j);
-					if(!isReserved(builder.toString())){
+					if (!isReserved(builder.toString())) {
 						seatGroup.add(builder.toString());
-						if(seatGroup.size() == numberOfSeatsTogether){
-							for(String s : seatGroup){
+						if (seatGroup.size() == numberOfSeatsTogether) {
+							for (String s : seatGroup) {
 								reserve(s);
 							}
 							return seatGroup;
-						}
-						else{
+						} else {
 							number--;
 						}
 					}
@@ -270,12 +362,12 @@ public class AirplaneSeats {
 		} else {
 			throw new NotEnoughSeatsException();
 		}
-		
-		if(seatGroup.get(0) == null){
+
+		if (seatGroup.get(0) == null) {
 			throw new NotEnoughSeatsException();
 		}
-		
-		for(String s : seatGroup){
+
+		for (String s : seatGroup) {
 			reserve(s);
 		}
 		return seatGroup;

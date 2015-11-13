@@ -152,5 +152,13 @@ public class AirplaneSeatsTest {
 		}
 		
 	}
+	
+	@Test
+	public void testToStringWithPlane() throws AlreadyReservedException, SeatOutOfBoundsException {
+		AirplaneSeats seats = new AirplaneSeats(3, 4);
+		seats.reserveAll("A1", "B1", "C1", "D1");
+		
+		Assert.assertEquals("  ABCD\n" + "1 ####\n" + "2 oooo\n" + "3 oooo\n", seats.toString());
+	}
 
 }
