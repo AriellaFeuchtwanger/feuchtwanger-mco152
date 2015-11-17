@@ -4,37 +4,61 @@ import java.awt.Color;
 
 public class Game {
 	private Board board;
-	private Player red;
-	private Player yellow;
+	private Player pinkPlayer;
+	private Player purplePlayer;
 	private Player lastPlayer;
-	
-	public Game(){
+
+	public Game() {
 		board = new Board();
-		red = new Player(Color.RED);
-		yellow = new Player(Color.YELLOW);
-		lastPlayer = yellow; //You usually start with red (at least, I do)
+		Color pink = new Color(255, 62, 150);
+		Color purple = new Color(178, 58, 238);
+		pinkPlayer = new Player(pink);
+		purplePlayer = new Player(purple);
+		lastPlayer = purplePlayer;
 	}
-	
-	public boolean move(int row, int column){
-		boolean win = false;
-		if(lastPlayer == yellow){
-			lastPlayer = red;
-		} else{
-			lastPlayer = yellow;
+
+	public boolean move(int row, int column) {
+		if (column > 6 || column < 0) {
+			throw new MoveOutOfBoundsException();
+		} else {
+			boolean win = false;
+			if (lastPlayer == purplePlayer) {
+				lastPlayer = pinkPlayer;
+			} else {
+				lastPlayer = purplePlayer;
+			}
+			board.move(row, column, lastPlayer.getColor());
+			win = win(row, column);
+			if (win) {
+				lastPlayer.addWin();
+			}
+
+			return win;
 		}
-		board.move(row, column, lastPlayer.getColor());
-		win = win(row, column);
-		if(win){
-			lastPlayer.addWin();
-		}
-		
-		return win;
 	}
-	
-	public Board getBoard(){
+
+	public Board getBoard() {
 		return board;
 	}
-	private boolean win(int row, int column){
+
+	public Color getColor() {
+		return lastPlayer.getColor();
+	}
+
+	public int getPinkWins() {
+		return pinkPlayer.getWins();
+	}
+
+	public int getPurpleWins() {
+		return purplePlayer.getWins();
+	}
+
+	public void reset() {
+		board = new Board();
+		lastPlayer = purplePlayer;
+	}
+
+	private boolean win(int row, int column) {
 		boolean win = board.win(row, column, lastPlayer.getColor());
 		return win;
 	}
