@@ -63,6 +63,7 @@ public class BoardJFrame extends JFrame {
 		for (int i = 0; i < buttons.length; i++) {
 			buttons[i] = new JButton();
 			buttons[i].setIcon(new ImageIcon("arrow.jpg"));
+			buttons[i].setBackground(backgroundBoard);
 			lastRows[i] = 5;
 			boardPane.add(buttons[i]);
 		}
