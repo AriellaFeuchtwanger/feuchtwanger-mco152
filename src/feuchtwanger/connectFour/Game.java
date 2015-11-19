@@ -58,6 +58,15 @@ public class Game {
 		lastPlayer = purplePlayer;
 	}
 
+	public void undo(int lastRow, int lastColumn) {
+		board.undo(lastRow, lastColumn);
+		if (lastPlayer == purplePlayer) {
+			lastPlayer = pinkPlayer;
+		} else {
+			lastPlayer = purplePlayer;
+		}
+	}
+
 	private boolean win(int row, int column) {
 		boolean win = board.win(row, column, lastPlayer.getColor());
 		return win;

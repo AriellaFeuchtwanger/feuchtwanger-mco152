@@ -1,6 +1,7 @@
 package feuchtwanger.connectFour;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -27,11 +28,16 @@ public class BoardJFrame extends JFrame {
 	private JLabel pinkScore;
 	private JLabel purpleScore;
 	private JButton[] buttons;
+	private JButton undo;
+	private int lastRow;
+	private int lastColumn;
 
 	public BoardJFrame(Game game) {
 		g = game;
 		lastRows = new int[7];
 		buttons = new JButton[7];
+		lastRow = 0;
+		lastColumn = 0;
 
 		setTitle("Connect Four");
 		setSize(800, 700);
@@ -53,7 +59,7 @@ public class BoardJFrame extends JFrame {
 		boardPane.setBackground(backgroundBoard);
 
 		board = new BoardComponent[6][7];
-		// Image image = new ImageIO.read(getClass().getResource("arrow.png"));
+
 		for (int i = 0; i < buttons.length; i++) {
 			buttons[i] = new JButton();
 			buttons[i].setIcon(new ImageIcon("arrow.jpg"));
@@ -70,15 +76,30 @@ public class BoardJFrame extends JFrame {
 
 		score = new JPanel();
 		score.setLayout(new BoxLayout(score, BoxLayout.X_AXIS));
-		pinkScore = new JLabel("Pink Score: " + g.getPinkWins(),
-				SwingConstants.LEFT);
+		score.setBackground(backgroundFrame);
+
+		pinkScore = new JLabel("Pink Score: " + g.getPinkWins());
 		pinkScore.setFont(new Font("Serif", Font.PLAIN, 25));
-		purpleScore = new JLabel("Yellow Score: " + g.getPurpleWins(),
-				SwingConstants.LEFT);
+		purpleScore = new JLabel("     Purple Score: " + g.getPurpleWins());
 		purpleScore.setFont(new Font("Serif", Font.PLAIN, 25));
+		undo = new JButton("Undo"); // for ppl who accidentally go when it isn't
+		// their turn. Or press the wrong button.
+		undo.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				g.undo(lastRow, lastColumn);
+				board[lastRow][lastColumn].setColor(Color.WHITE);
+				board[lastRow][lastColumn].repaint();
+				lastRows[lastColumn] = lastRow;
+				lastRow = 0;
+				lastColumn = 0;
+			}
+		});
 
 		score.add(pinkScore);
 		score.add(purpleScore);
+		score.add(undo);
 
 		add(winner);
 		add(boardPane);
@@ -93,9 +114,9 @@ public class BoardJFrame extends JFrame {
 					boolean win = g.move(lastRows[column], column);
 					Color c = g.getColor();
 					board[lastRows[column]][column].setColor(c);
-					int lastRow = lastRows[column];
-					lastRow--;
-					lastRows[column] = lastRow;
+					lastColumn = column;
+					lastRow = lastRows[column];
+					lastRows[column] = lastRow - 1;
 
 					if (win) {
 						winner.setText("Winner!!!!");
@@ -117,7 +138,8 @@ public class BoardJFrame extends JFrame {
 		for (int i = 0; i < lastRows.length; i++) {
 			lastRows[i] = 5;
 		}
-
+		lastRow = 0;
+		lastColumn = 0;
 		winner.setText("Connect Four");
 		pinkScore.setText("Pink Score: " + g.getPinkWins());
 		purpleScore.setText("     Purple Score: " + g.getPurpleWins());

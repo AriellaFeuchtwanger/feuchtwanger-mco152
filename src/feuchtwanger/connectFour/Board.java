@@ -9,6 +9,10 @@ public class Board {
 		board = new Color[6][7];
 	}
 
+	public void undo(int row, int column) {
+		board[row][column] = null;
+	}
+
 	public void move(int row, int column, Color color) {
 		if (board[row][column] != Color.RED
 				&& board[row][column] != Color.YELLOW) {
@@ -19,7 +23,7 @@ public class Board {
 	public boolean win(int row, int column, Color color) {
 		boolean win = false;
 
-		if (column > board[row].length) {
+		if (column >= board[row].length) {
 			throw new MoveOutOfBoundsException();
 		}
 		win = checkRow(row, color);
