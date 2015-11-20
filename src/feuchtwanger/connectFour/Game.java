@@ -37,6 +37,9 @@ public class Game {
 		}
 	}
 
+	public boolean isFull(){
+		return board.isFull();
+	}
 	public Board getBoard() {
 		return board;
 	}

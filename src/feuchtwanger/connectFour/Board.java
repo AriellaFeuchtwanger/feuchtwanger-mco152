@@ -20,6 +20,17 @@ public class Board {
 		}
 	}
 
+	public boolean isFull(){
+		for(int i = 0; i < board.length; i++){
+			for(int j = 0; j < board[i].length; j++){
+				if(board[i][j] == null){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
 	public boolean win(int row, int column, Color color) {
 		boolean win = false;
 
