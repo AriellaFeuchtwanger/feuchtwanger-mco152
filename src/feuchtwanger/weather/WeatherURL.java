@@ -17,10 +17,7 @@ public class WeatherURL {
 	}
 	
 	public URL getURL() throws MalformedURLException{
-		String theURL = "";
-		theURL.concat(originalURL1);
-		theURL.concat(zip);
-		theURL.concat(originalURL2);
+		String theURL = originalURL1 + zip + originalURL2;
 		
 		URL url = new URL(theURL);
 		return url;
