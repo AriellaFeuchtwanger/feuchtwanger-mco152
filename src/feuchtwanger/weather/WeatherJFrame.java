@@ -35,7 +35,7 @@ public class WeatherJFrame extends JFrame {
 	public WeatherJFrame() throws IOException {
 		background = new Color(100, 149, 237);
 		setTitle("Weather");
-		setSize(1300, 1000);
+		setSize(1300, 600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		Container container = getContentPane();
