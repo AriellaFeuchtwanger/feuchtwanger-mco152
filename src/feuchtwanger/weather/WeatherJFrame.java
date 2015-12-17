@@ -2,6 +2,7 @@ package feuchtwanger.weather;
 
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -9,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 
 import javax.imageio.ImageIO;
 import javax.swing.Box;
@@ -33,50 +35,85 @@ public class WeatherJFrame extends JFrame {
 	public WeatherJFrame() throws IOException {
 		background = new Color(100, 149, 237);
 		setTitle("Weather");
-		setSize(600, 400);
+		setSize(1300, 1000);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		setLayout(new GridLayout(0, 1));
+		Container container = getContentPane();
+		setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
 		getContentPane().setBackground(new Color(100, 149, 237));
 
 		JLabel location = new JLabel("TBD");
-		location.setFont(new Font("Times New Roman", Font.BOLD, 45));
-		location.setAlignmentX(LEFT_ALIGNMENT);
-		location.setHorizontalTextPosition(SwingConstants.LEFT);
+		location.setFont(new Font("Times New Roman", Font.BOLD, 35));
+		location.setAlignmentX(CENTER_ALIGNMENT);
+		location.setHorizontalTextPosition(SwingConstants.CENTER);
 		location.setBackground(background);
 
-		JLabel temperature = new JLabel("TBD");
-		temperature.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		temperature.setBackground(background);
+		JLabel[] dates = new JLabel[16];
+		JLabel[] weatherDetail = new JLabel[16];
+		JLabel[] weatherDescription = new JLabel[16];
+		JLabel[] images = new JLabel[16];
 
-		JLabel weatherDetail = new JLabel("TBD");
-		weatherDetail.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		weatherDetail.setBackground(background);
-		
-		JLabel weatherDescription = new JLabel("TBD");
-		weatherDescription.setFont(new Font("Times New Roman", Font.PLAIN, 25));
-		weatherDescription.setBackground(background);
-		JTextField zipField = new JTextField();
-		JLabel image = new JLabel();
-
-		JButton reset = new JButton("Reset Zip Code");
-		
 		add(location);
-		add(temperature);
-		add(weatherDetail);
-		add(weatherDescription);
-		add(image);
-		add(zipField);
-		add(reset);
+		JPanel panel = new JPanel(new GridLayout(0, 8));
+		panel.setBackground(background);
 		
+
+		for (int i = 0; i < 16; i++) {
+			dates[i] = setDate(i);
+			weatherDetail[i] = setWeatherDescription();
+			weatherDescription[i] = setWeatherDescription();
+			images[i] = new JLabel();
+
+			panel.add(dates[i]);
+			panel.add(weatherDetail[i]);
+			panel.add(weatherDescription[i]);
+			panel.add(images[i]);
+		}
+
+		JTextField cityField = new JTextField();
+		cityField.setMaximumSize(new Dimension(100, 100));
+		JButton reset = new JButton("Reset City (no spaces, please!)");
+		reset.setAlignmentX(CENTER_ALIGNMENT);
+
+		add(panel);
+		add(cityField);
+		add(reset);
+
 		reset.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				WeatherThread thread = new WeatherThread(location, temperature, weatherDetail, weatherDescription,
-						zipField.getText(), image);
+				WeatherThread thread = new WeatherThread(location,
+						weatherDetail, weatherDescription, cityField.getText(),
+						images);
 				thread.start();
+				panel.repaint();
 			}
 		});
+	}
+
+	public JLabel setWeatherDetail() {
+		JLabel weatherDetail = new JLabel("TBD");
+		weatherDetail.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		weatherDetail.setBackground(background);
+
+		return weatherDetail;
+	}
+
+	public JLabel setWeatherDescription() {
+		JLabel weatherDescription = new JLabel("TBD");
+		weatherDescription.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		weatherDescription.setBackground(background);
+
+		return weatherDescription;
+	}
+	
+	public JLabel setDate(int day){
+		LocalDate today = LocalDate.now();
+		JLabel date = new JLabel(today.getMonth() + " "
+				+ (today.getDayOfMonth() + day) + ", " + today.getYear());
+		date.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		
+		return date;
 	}
 }

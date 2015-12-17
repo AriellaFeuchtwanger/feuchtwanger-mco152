@@ -31,35 +31,31 @@ public class WeatherJSONFile {
 		this.weather = weather;
 	}
 
-	public double getTemp() {
-		return weather.getTemp();
+	public double getTempMin(int day) {
+		return weather.getTempMin(day);
 	}
 
-	public double getTempMin() {
-		return weather.getTempMin();
-	}
-
-	public double getTempMax() {
-		return weather.getTempMax();
+	public double getTempMax(int day) {
+		return weather.getTempMax(day);
 	}
 	
-	public String getIcon(){
-		return weather.getIcon();
+	public String getIcon(int day){
+		return weather.getIcon(day);
 	}
 	
-	public String getDescription(){
-		return weather.getDescription();
+	public String getDescription(int day){
+		return weather.getDescription(day);
 	}
 	
-	public String getMain(){
-		return weather.getMain();
+	public String getMain(int day){
+		return weather.getMain(day);
+	}
+	
+	public String getCity(){
+		return weather.getName();
 	}
 	
 	public String getCountry(){
 		return weather.getCountry();
-	}
-	
-	public String getPlace(){
-		return weather.getName();
 	}
 }

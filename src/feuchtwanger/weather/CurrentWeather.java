@@ -2,47 +2,37 @@ package feuchtwanger.weather;
 
 public class CurrentWeather {
 	//Array of weather objects and a main object
-	private Coordinates coordinates;
-	private weather[] weather;
-	private String base;
-	private main main;
-	private Wind wind;
-	private Clouds clouds;
-	private int dt;
-	private Sys sys;
-	private int id;
-	private String name;
-	private int cod;
+	private City city;
+	private String cod;
+	private double message;
+	private int cnt;
+	private WeatherList[] list;
 	
-	public double getTemp(){
-		return main.getTemp();
+	public double getTempMin(int day){
+		return list[day].getMin();
 	}
 	
-	public double getTempMin(){
-		return main.getTempMin();
+	public double getTempMax(int day){
+		return list[day].getMax();
 	}
 	
-	public double getTempMax(){
-		return main.getTempMax();
+	public String getIcon(int day){
+		return list[day].getIcon();
 	}
 	
-	public String getIcon(){
-		return weather[0].getIcon();
+	public String getDescription(int day){
+		return list[day].getDescription();
 	}
 	
-	public String getDescription(){
-		return weather[0].getDescription();
-	}
-	
-	public String getMain(){
-		return weather[0].getMain();
+	public String getMain(int day){
+		return list[day].getMain();
 	}
 	
 	public String getCountry(){
-		return sys.getCountry();
+		return city.getCountry();
 	}
 	
 	public String getName(){
-		return name;
+		return city.getName();
 	}
 }

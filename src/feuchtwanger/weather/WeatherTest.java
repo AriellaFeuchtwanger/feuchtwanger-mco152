@@ -11,7 +11,7 @@ public class WeatherTest {
 
 	@Test
 	public void testURL(){
-		WeatherURL url = new WeatherURL("11210");
+		WeatherURL url = new WeatherURL("Brooklyn");
 		URL name;
 		try {
 			name = url.getURL();
@@ -22,22 +22,11 @@ public class WeatherTest {
 	}
 	
 	@Test
-	public void testGetTemp() throws IOException{
-		WeatherURL url = new WeatherURL("11210");
-		try {
-			WeatherJSONFile weather = new WeatherJSONFile(url.getURL());
-			Assert.assertNotNull(weather.getTemp());
-		} catch (MalformedURLException e) {
-			Assert.fail("Didn't work - URL");
-		}
-	}
-	
-	@Test
 	public void testGetTempMin() throws IOException{
-		WeatherURL url = new WeatherURL("11210");
+		WeatherURL url = new WeatherURL("Brooklyn");
 		try {
 			WeatherJSONFile weather = new WeatherJSONFile(url.getURL());
-			Assert.assertNotNull(weather.getTempMin());
+			Assert.assertNotNull(weather.getTempMin(9));
 		} catch (MalformedURLException e) {
 			Assert.fail("Didn't work - URL");
 		}
@@ -45,10 +34,10 @@ public class WeatherTest {
 	
 	@Test
 	public void testGetTempMax() throws IOException{
-		WeatherURL url = new WeatherURL("11210");
+		WeatherURL url = new WeatherURL("Brooklyn");
 		try {
 			WeatherJSONFile weather = new WeatherJSONFile(url.getURL());
-			Assert.assertNotNull(weather.getTempMax());
+			Assert.assertNotNull(weather.getTempMax(1));
 		} catch (MalformedURLException e) {
 			Assert.fail("Didn't work - URL");
 		}
@@ -56,22 +45,21 @@ public class WeatherTest {
 	
 	@Test
 	public void testGetIcon() throws IOException{
-		WeatherURL url = new WeatherURL("11210");
+		WeatherURL url = new WeatherURL("Brooklyn");
 		try {
 			WeatherJSONFile weather = new WeatherJSONFile(url.getURL());
-			Assert.assertNotNull(weather.getIcon());
+			Assert.assertNotNull(weather.getIcon(1));
 		} catch (MalformedURLException e) {
 			Assert.fail("Didn't work - URL");
 		}
 	}
 	
-	
 	@Test
 	public void testGetDescripion() throws IOException{
-		WeatherURL url = new WeatherURL("11210");
+		WeatherURL url = new WeatherURL("Brooklyn");
 		try {
 			WeatherJSONFile weather = new WeatherJSONFile(url.getURL());
-			Assert.assertNotNull(weather.getDescription());
+			Assert.assertNotNull(weather.getDescription(1));
 		} catch (MalformedURLException e) {
 			Assert.fail("Didn't work - URL");
 		}
@@ -80,10 +68,10 @@ public class WeatherTest {
 	
 	@Test
 	public void testGetMain() throws IOException{
-		WeatherURL url = new WeatherURL("11210");
+		WeatherURL url = new WeatherURL("Brooklyn");
 		try {
 			WeatherJSONFile weather = new WeatherJSONFile(url.getURL());
-			Assert.assertNotNull(weather.getMain());
+			Assert.assertNotNull(weather.getMain(1));
 		} catch (MalformedURLException e) {
 			Assert.fail("Didn't work - URL");
 		}
