@@ -3,6 +3,8 @@ package feuchtwanger.weather;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -37,7 +39,9 @@ public class WeatherThread extends Thread {
 		}
 		location.setText(weather.getCity() + ", " + weather.getCountry());
 		for (int i = 0; i < 16; i++) {
-			dates[i].setText(String.valueOf(weather.getDt(i)));
+			Date date = new Date(weather.getDt(i) * 1000);
+			SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+			dates[i].setText(formatter.format(date));
 			weatherDetail[i].setText("Hi " + weather.getTempMax(i) + "/Lo "
 					+ weather.getTempMin(i));
 

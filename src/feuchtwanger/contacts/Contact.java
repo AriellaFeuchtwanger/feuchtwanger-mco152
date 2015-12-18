@@ -37,6 +37,14 @@ public class Contact implements Comparable<Contact>{
 	public int compareTo(Contact other){
 		String[] thisName = name.split(" ");
 		String[] otherName = other.getName().split(" ");
-		return thisName[(thisName.length - 1)].compareTo(otherName[(otherName.length - 1)]);
+		String lastName = thisName[thisName.length-1];
+		String otherLastName = otherName[otherName.length-1];
+		
+		if(lastName.length() < 2){
+			lastName = thisName[thisName.length-2];
+		} else if(otherLastName.length() < 2){
+			otherLastName = otherName[otherName.length-2];
+		}
+		return lastName.compareTo(otherLastName);
 	}
 }
