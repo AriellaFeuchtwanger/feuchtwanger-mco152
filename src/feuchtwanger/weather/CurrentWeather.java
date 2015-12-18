@@ -35,4 +35,8 @@ public class CurrentWeather {
 	public String getName(){
 		return city.getName();
 	}
+	
+	public long getDT(int day){
+		return list[day].getDt();
+	}
 }

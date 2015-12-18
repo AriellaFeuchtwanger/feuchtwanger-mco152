@@ -51,6 +51,10 @@ public class WeatherJSONFile {
 		return weather.getMain(day);
 	}
 	
+	public long getDt(int day){
+		return weather.getDT(day);
+	}
+	
 	public String getCity(){
 		return weather.getName();
 	}

@@ -84,7 +84,7 @@ public class WeatherJFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				WeatherThread thread = new WeatherThread(location,
-						weatherDetail, weatherDescription, cityField.getText(),
+						weatherDetail, weatherDescription, dates, cityField.getText(),
 						images);
 				thread.start();
 				panel.repaint();
@@ -110,8 +110,7 @@ public class WeatherJFrame extends JFrame {
 	
 	public JLabel setDate(int day){
 		LocalDate today = LocalDate.now();
-		JLabel date = new JLabel(today.getMonth() + " "
-				+ (today.getDayOfMonth() + day) + ", " + today.getYear());
+		JLabel date = new JLabel();
 		date.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		
 		return date;

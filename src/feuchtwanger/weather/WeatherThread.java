@@ -14,14 +14,16 @@ public class WeatherThread extends Thread {
 	private JLabel[] weatherDescription;
 	private String city;
 	private JLabel[] images;
+	private JLabel[] dates;
 	private WeatherJSONFile weather;
 
 	public WeatherThread(JLabel location,
-			JLabel[] weatherDetail, JLabel[] weatherDescription, String city,
+			JLabel[] weatherDetail, JLabel[] weatherDescription, JLabel[] dates, String city,
 			JLabel[] images) {
 		this.location = location;
 		this.weatherDetail = weatherDetail;
 		this.weatherDescription = weatherDescription;
+		this.dates = dates;
 		this.images = images;
 		this.city = city;
 	}
@@ -35,6 +37,7 @@ public class WeatherThread extends Thread {
 		}
 		location.setText(weather.getCity() + ", " + weather.getCountry());
 		for (int i = 0; i < 16; i++) {
+			dates[i].setText(String.valueOf(weather.getDt(i)));
 			weatherDetail[i].setText("Hi " + weather.getTempMax(i) + "/Lo "
 					+ weather.getTempMin(i));
 
