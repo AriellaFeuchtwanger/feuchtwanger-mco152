@@ -4,18 +4,18 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 public class ContactThread extends Thread{
-	private JList list;
-	private DefaultListModel<String> model;
+	private JList<Contact> list;
+	private DefaultListModel<Contact> model;
 	private Contact[] contactList;
 	
-	public ContactThread(JList list, DefaultListModel<String> model){
+	public ContactThread(JList<Contact> list, DefaultListModel<Contact> model){
 		this.list = list;
 		
 		this.model = model;
@@ -31,7 +31,7 @@ public class ContactThread extends Thread{
 		Arrays.sort(contactList);
 		
 		for(int i = 0; i < contactList.length; i++){
-			model.addElement(contactList[i].getName());
+			model.addElement(contactList[i]);
 		}
 		
 		list.addMouseListener(new MouseAdapter() {

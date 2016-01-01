@@ -47,4 +47,8 @@ public class Contact implements Comparable<Contact>{
 		}
 		return lastName.compareTo(otherLastName);
 	}
+	
+	public String toString(){
+		return name;
+	}
 }
