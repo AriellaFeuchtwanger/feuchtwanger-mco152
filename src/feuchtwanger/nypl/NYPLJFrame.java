@@ -10,6 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -43,6 +44,7 @@ public class NYPLJFrame extends JFrame {
 
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+		buttonPanel.setAlignmentX(CENTER_ALIGNMENT);
 
 		JTextField input = new JTextField();
 		input.setMaximumSize(new Dimension(800, 25));
@@ -52,6 +54,7 @@ public class NYPLJFrame extends JFrame {
 		JButton previous = new JButton("Previous");
 		previous.setEnabled(false);
 		JButton next = new JButton("Next");
+		
 		next.setEnabled(false);
 		JLabel page = new JLabel("x/x");
 		JLabel image = new JLabel(" ");
@@ -61,9 +64,11 @@ public class NYPLJFrame extends JFrame {
 		list.setMinimumSize(new Dimension(100, 100));
 		list.setMaximumSize(new Dimension(100, 100));
 		
+		buttonPanel.add(Box.createRigidArea(new Dimension(160,0)));
 		buttonPanel.add(previous);
 		buttonPanel.add(page);
 		buttonPanel.add(next);
+		buttonPanel.add(Box.createRigidArea(new Dimension(5,0)));
 		searchArea.add(input);
 		searchArea.add(search);
 		imagePanel.add(buttonPanel, BorderLayout.PAGE_START);
