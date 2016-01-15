@@ -47,7 +47,7 @@ public class ImageThread extends Thread {
 		try {
 			image.setIcon(setImage(captures[pageNumber].getImageLink()));
 			pages.setText((pageNumber + 1) + "/" + captures.length);
-			if(pageNumber == captures.length){
+			if((pageNumber+1) == captures.length){
 				previous.setEnabled(false);
 				next.setEnabled(false);
 			} else{
@@ -98,7 +98,7 @@ public class ImageThread extends Thread {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				if(pageNumber == captures.length){
+				if((pageNumber + 1) == captures.length){
 					next.setEnabled(false);
 				}
 			}
